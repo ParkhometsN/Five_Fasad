@@ -10,7 +10,7 @@
 .message_chat_container{
     position: absolute;
     left: 50%;
-    bottom: 40px;             
+    bottom: 30px;             
     transform: translateX(-50%);
     pointer-events: auto; 
     pointer-events: none;   
@@ -22,3 +22,8 @@
     
 }
 
+@media screen and (max-width: 834px){
+    .message_chat_container {
+        width: 87vw;
+    }
+}
