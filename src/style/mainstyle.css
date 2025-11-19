@@ -19,18 +19,7 @@ a{
     --black2: #1D1D1D;
     --black3: #252525;
 }
-@font-face {
-    font-family: "coolvetregular";
-    src: url(./fonts/coolvetica\ rg.ttf);
-}
-@font-face {
-    font-family: "Cygre";
-    src: url(./fonts/Cygre-Book.ttf);
-}
-@font-face {
-    font-family:"logoFont";
-    src: url(./fonts/Widock\ TRIAL\ Bold.otf);
-}
+
 
 @media screen and (max-width: 1440px){
     .wrapper{

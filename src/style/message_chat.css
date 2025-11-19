@@ -8,6 +8,8 @@
 }
 
 .message_chat_container{
+    gap: 16px;
+    display: flex;
     position: absolute;
     left: 50%;
     bottom: 30px;             
@@ -19,7 +21,34 @@
     padding: 5px;
     width: 487px;
     height: 50px;
-    
+}
+.openchat{
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.openchat h4{
+    color: var(--prymary);
+        font-family: "Cygre";
+}
+.message_chat_content{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--black);
+    border-radius: 45px;
+    height: 100%;
+    width: 100%;
+}
+.phonecall{
+    width: 55px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: var(--prymary);
+    border-radius: 50%;
 }
 
 @media screen and (max-width: 834px){
