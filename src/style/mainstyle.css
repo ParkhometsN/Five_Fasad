@@ -1,0 +1,95 @@
+body{
+    margin: 0 auto;
+    max-width: 1920px;
+    background-color: var(--black);
+    font-family: "coolvetregular";
+    color: white;
+}
+html{
+    scroll-behavior: smooth;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+h1 {
+display: block;
+font-size: 56px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 200;
+line-height: 77%;
+letter-spacing: 2%;
+}
+h2 {
+display: block;
+font-size: 35px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 200;
+line-height: 77%;
+letter-spacing: 2%;
+}
+h3 {
+display: block;
+font-size: 20px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 200;
+line-height: 77%;
+letter-spacing: 2%;
+}
+h4 {
+display: block;
+font-size: 18px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 100;
+line-height: 118.5%;
+letter-spacing: 2%;
+}
+h5 {
+display: block;
+font-size: 16px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 200;
+line-height: 77%;
+letter-spacing: 2%;
+}
+
+:root{
+    --prymary: #E75E0E;
+    --black: #171717;
+    --black2: #1D1D1D;
+    --black3: #252525;
+}
+@font-face {
+    font-family: "coolvetregular";
+    src: url(./fonts/coolvetica\ rg.ttf);
+}
+@font-face {
+    font-family: "Cygre";
+    src: url(./fonts/Cygre-Book.ttf);
+}
+@font-face {
+    font-family:"logoFont";
+    src: url(./fonts/Widock\ TRIAL\ Bold.otf);
+}
+
+@media screen and (max-width: 1440px){
+    .wrapper{
+        max-width: 1400px;
+        padding: 2vw 2vw;
+        margin: 0 auto;
+    }
+}
+
+.stroke_main{
+    border: 1.5px var(--black3) solid;
+}
