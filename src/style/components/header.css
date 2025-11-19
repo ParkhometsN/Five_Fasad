@@ -26,6 +26,12 @@ padding: 24px;
 .navigation li{
     list-style: none;
 }
+.navigation li a{
+  transition: all 0.3s ease;
+}
+.navigation li a:hover{
+  opacity: 0.5;
+}
 .logo h3{
     font-family:"logoFont";
     padding-top: 5px;
@@ -146,6 +152,12 @@ padding: 24px;
 .header-content a img{
   width: 37px;
   height: 37px;
+}
+
+.mobile li a h4{
+    font-size: 21px;
+    margin-block-start: 0.3em;
+    margin-block-end: 0.3em;
 }
 @media screen and (max-width: 834px){
     .burgerbutton{

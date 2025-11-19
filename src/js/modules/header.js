@@ -3,9 +3,9 @@ export function GetHeader (){
     const htmlHeader = `
     <div class="main_header_positon">
                 <div class="headerfix">
-                    <div class="header-container stroke_main">
+                    <div  class="header-container stroke_main">
                         <div class="header-content">
-                            <a href="index.html" class="logo"><img src="./src/assests/svg/main_logotype.svg" alt="логотип пятого фасада"><h3>ПЯТЫЙ ФАСАД</h3> </a>
+                            <a  href="index.html" class="logo"><img src="./src/assests/svg/main_logotype.svg" alt="логотип пятого фасада"><h3>ПЯТЫЙ ФАСАД</h3> </a>
                             <nav class="navigation">
                                 <li><a href="index.html"><h4>главная</h4></a></li>
                                 <li><a href="Portfolio.html"><h4>портфолио</h4></a></li>

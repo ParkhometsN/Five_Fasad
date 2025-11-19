@@ -1,0 +1,24 @@
+.message_chat{
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;  
+    width: 100%;
+    z-index: 99999;
+}
+
+.message_chat_container{
+    position: absolute;
+    left: 50%;
+    bottom: 40px;             
+    transform: translateX(-50%);
+    pointer-events: auto; 
+    pointer-events: none;   
+    background-color: var(--black2);
+    border-radius: 53px;
+    padding: 5px;
+    width: 487px;
+    height: 50px;
+    
+}
+
