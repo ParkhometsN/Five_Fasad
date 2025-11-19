@@ -28,6 +28,7 @@ padding: 24px;
 }
 .logo h3{
     font-family:"logoFont";
+    padding-top: 5px;
 }
 
 .logo {
@@ -86,20 +87,20 @@ padding: 24px;
 
 .toggle {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 6px;
   transition-duration: .5s;
 }
 
 .bars {
   width: 100%;
-  height: 3px;
+  height: 2px;
   background-color: var(--prymary);
   border-radius: 4px;
 }
@@ -142,6 +143,10 @@ padding: 24px;
     display: none;
 }
 
+.header-content a img{
+  width: 37px;
+  height: 37px;
+}
 @media screen and (max-width: 834px){
     .burgerbutton{
         display: inline;
@@ -151,5 +156,9 @@ padding: 24px;
     }
     .navigation{
         display: none;
+    }
+    .header-content a img{
+      width: 27px;
+      height: 27px;
     }
 }

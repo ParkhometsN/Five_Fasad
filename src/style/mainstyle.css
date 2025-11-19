@@ -12,56 +12,7 @@ a{
     color: white;
     text-decoration: none;
 }
-h1 {
-display: block;
-font-size: 56px;
-margin-block-start: 0em;
-margin-block-end: 0em;
-margin-inline-start: 0px;
-font-weight: 200;
-line-height: 77%;
-letter-spacing: 2%;
-}
-h2 {
-display: block;
-font-size: 35px;
-margin-block-start: 0em;
-margin-block-end: 0em;
-margin-inline-start: 0px;
-font-weight: 200;
-line-height: 77%;
-letter-spacing: 2%;
-}
-h3 {
-display: block;
-font-size: 20px;
-margin-block-start: 0em;
-margin-block-end: 0em;
-margin-inline-start: 0px;
-font-weight: 200;
-line-height: 77%;
-letter-spacing: 2%;
-}
-h4 {
-display: block;
-font-size: 18px;
-margin-block-start: 0em;
-margin-block-end: 0em;
-margin-inline-start: 0px;
-font-weight: 100;
-line-height: 118.5%;
-letter-spacing: 2%;
-}
-h5 {
-display: block;
-font-size: 16px;
-margin-block-start: 0em;
-margin-block-end: 0em;
-margin-inline-start: 0px;
-font-weight: 200;
-line-height: 77%;
-letter-spacing: 2%;
-}
+
 
 :root{
     --prymary: #E75E0E;
