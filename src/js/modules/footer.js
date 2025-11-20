@@ -37,7 +37,7 @@ export function GetFooter(){
                                     <li><a href="Portfolio.html"><h4>портфолио</h4></a></li>
                                     <li><a href="AboutUs.html"><h4>о компании</h4></a></li>
                                 </nav>
-                                <button class="default_button icon_custom"><img src="./src/assests/svg/up.svg"><h4>На вверх</h4></button>
+                                <a href="#hero"><button class="default_button icon_custom"><img src="./src/assests/svg/up.svg"><h4>На вверх</h4></button></a>
                             </div>
                             <div class="threlineinf">
                                 <a style="font-size: 12px;" href="tel:+77778889900">+8 (800) 555 35 - 35</a>
