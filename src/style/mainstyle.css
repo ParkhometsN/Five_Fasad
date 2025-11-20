@@ -17,12 +17,11 @@ nav{
 }
 :root{
     --prymary: #E75E0E;
+    --prymary-hover: #e75e0e52;
     --black: #171717;
     --black2: #1D1D1D;
     --black3: #252525;
 }
-
-
 @media screen and (max-width: 1440px){
     .wrapper{
 
@@ -30,9 +29,19 @@ nav{
         margin: 0 auto;
     }
 }
-
 .stroke_main{
     border: 1.5px var(--black3) solid;
 }
 
+.stroke_mainhover{
+    cursor: pointer;
+    border: 1.5px var(--black3) solid;
+    transition: all 0.2s ease;
+}
+.stroke_mainhover:hover{
+    border: 1.5px var(--prymary) solid;
+}
 
+.stroke_mainhover:active{
+    border: 1.5px var(--prymary-hover) solid;
+}

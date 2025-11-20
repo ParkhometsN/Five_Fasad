@@ -15,13 +15,59 @@
     flex-direction: column;
     gap: 24px;
 }
+.heroimgtitle{
+    padding: 10px;
+}
 .heroimgtitle img{
     width: 45vw;
-    border-radius: 24px;
-    padding: 10px;
+    height: 100%;
+    border-radius: 16px;
     object-fit: cover;
 }
-
+.describe_project{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 55px;
+}
+.card_item_content img{
+    border-radius: 16px;
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+}
+.dspr{
+    padding-top: 10px;
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+}
+.card_item_container{
+    border-radius: 24px;
+    padding: 10px;
+    width: 390px;
+    height: 560px;
+    background-color: var(--black2);
+}
+.main_content{
+    padding-top: 40px;
+    padding-bottom: 150px;
+    display: flex;
+    justify-content: center;
+}
+.grid_of_card{
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+}
+.card_item_container{
+    display: flex;
+}
+@media screen and (max-width: 1194px){
+    .grid_of_card{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
 @media screen and (max-width: 834px){
     .heroblock{
         padding: 90px 20px 20px 20px !important;
@@ -42,6 +88,9 @@
     }
     .text_portfoliotitle {
         padding: 24px;
+    }
+        .grid_of_card{
+        grid-template-columns: repeat(1, 1fr);
     }
 
 

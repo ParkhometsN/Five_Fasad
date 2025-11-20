@@ -35,3 +35,11 @@
     gap: 10px;
     align-items: center;
 }
+
+.icon_button{
+    background-color: var(--black);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+        border: 1.5px var(--black3) solid;
+}

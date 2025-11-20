@@ -1,0 +1,23 @@
+.slider_open_card{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.slider_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #00000073;
+}
+.slider_content{
+    padding: 10px;
+    background-color: var(--black2);
+    width: 80vw;
+    height: 80vh;
+    border-radius: 24px;
+}

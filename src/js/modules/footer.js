@@ -4,8 +4,8 @@ export function GetFooter(){
         <div id="footer" class="footer_container">
                 <div class="footer_content stroke_main">
                     <div class="footer_cc">
-                        <div class="img_mockup">
-                            <img src="./src/assests/img/footerclik.png" alt="рулетка пятого фасада">
+                        <div  class="img_mockup">
+                            <img  src="./src/assests/img/footerclik.png" alt="рулетка пятого фасада">
                         </div>
                         <div class="textfooter">
                             <h1>От замеров до <br>
@@ -13,7 +13,7 @@ export function GetFooter(){
                             </h1>
                             <h4>Наш результат — это безупречный потолок, который смонтирован чисто и точно в срок. Используем только сертифицированные материалы и современное оборудование.
                             </h4>
-                            <button style="width: 128px;" class="default_button buttonfoter"><h4>связаться</h4></button>
+                            <button  style="width: 128px;" class="default_button buttonfoter"><h4>связаться</h4></button>
                         </div>
                         <div class="partners stroke_main">
                             <div class="partners_content">
