@@ -1,0 +1,50 @@
+.heroblock{
+    padding: 110px 20px 20px 20px;
+}
+.hero_container_portfolio{
+    background-color: var(--black2);
+    width: 100%;
+    border-radius: 24px;
+    height: 65vh;
+    display: flex;
+    flex-direction: column-reverse;
+justify-content: flex-end;
+}
+.text_portfoliotitle{
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.heroimgtitle{
+    padding: 10px;
+}
+.heroimgtitle img{
+    width: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+
+@media screen and (max-width: 834px){
+    .hero_container_portfolio {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+        height: 70vh;
+}
+.heroimgtitle {
+    padding: 10px;
+    height: 100%;
+}
+.heroimgtitle img {
+    height: 100%;
+}
+.heroblock {
+    padding: 85px 20px 20px 20px;
+}
+.text_portfoliotitle {
+    padding: 16px;
+    gap: 8px;
+}
+}
