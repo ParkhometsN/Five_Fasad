@@ -1,0 +1,37 @@
+.default_button{
+    background-color: var(--prymary);
+    padding: 10px 20px;
+    border-radius: 24px;
+    color: white;
+    border: none;
+    font-family: "coolvetregular";
+    transition: all 0.3s ease;
+}
+.default_button:hover{
+    opacity: 0.8;
+}
+.default_button:active{
+    opacity: 0.4;
+}
+
+.black_button{
+    background-color: var(--black2);
+    padding: 10px 20px;
+    border-radius: 24px;
+    color: white;
+    border: none;
+    font-family: "coolvetregular";
+    transition: all 0.3s ease;
+        border: 1.5px var(--black3) solid;
+}
+.black_button:hover{
+    opacity: 0.8;
+}
+.black_button:active{
+    opacity: 0.4;
+}
+.icon_custom{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

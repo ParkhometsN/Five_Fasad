@@ -6,13 +6,15 @@ body{
 }
 html{
     scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 a{
     color: white;
     text-decoration: none;
 }
-
-
+nav{
+    list-style: none;
+}
 :root{
     --prymary: #E75E0E;
     --black: #171717;
@@ -24,7 +26,7 @@ a{
 @media screen and (max-width: 1440px){
     .wrapper{
         max-width: 1400px;
-        padding: 2vw 2vw;
+        padding: 3vw 3vw;
         margin: 0 auto;
     }
 }

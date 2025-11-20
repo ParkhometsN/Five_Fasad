@@ -8,7 +8,9 @@ export function MessageChat (){
                         <h4>Чат с менеджером</h4>
                     </div>
                 </div>
-                <button class="phonecall"><img src="./src/assests/svg/phone.svg" alt="иконка телефона"></button>
+                <a href="tel:+77778889900">
+                    <button class="phonecall"><img src="./src/assests/svg/phone.svg" alt="иконка телефона"></button>
+                </a>
             </div>
     `
     ContainerMessageChat.innerHTML = MessageChatHtml

@@ -27,10 +27,14 @@ padding: 24px;
     list-style: none;
 }
 .navigation li a{
+  opacity: 1;
   transition: all 0.3s ease;
 }
 .navigation li a:hover{
-  opacity: 0.5;
+  opacity: 0.1;
+}
+.navigation li a:active{
+  opacity: 0.1;
 }
 .logo h3{
     font-family:"logoFont";

@@ -49,6 +49,10 @@
     border: none;
     background-color: var(--prymary);
     border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.phonecall:hover{
+    opacity: 0.8;
 }
 
 @media screen and (max-width: 834px){
