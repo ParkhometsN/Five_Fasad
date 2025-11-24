@@ -31,7 +31,7 @@ padding: 24px;
   transition: all 0.3s ease;
 }
 .navigation li a:hover{
-  opacity: 0.1;
+  opacity: 0.5;
 }
 .navigation li a:active{
   opacity: 0.1;

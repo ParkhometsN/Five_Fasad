@@ -1,12 +1,13 @@
-export function Preloader (){
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            const preloader = document.getElementById('preloader');
+export function hidePreloader() {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
             preloader.style.opacity = '0';
-            setTimeout(function() {
+            setTimeout(() => {
                 preloader.style.display = 'none';
             }, 500);
-            
-        }, 1000);
+        }
+    }
+
+    window.addEventListener('load', () => {
+        hidePreloader();
     });
-}

@@ -95,3 +95,29 @@
 
 
 }
+@media screen and (max-width: 450px){
+    .card_item_container{
+        border-radius: 24px;
+        padding: 0px;
+        width: 100%;
+        height: 157vw;;
+        background-color: var(--black2);
+    }
+    .card_item{
+        padding: 0px 20px 0px 20px;
+    }
+    .card_item_content{
+        padding: 10px;
+    }
+    .slider_content {
+        padding: 0px !important;
+        background-color: var(--black2);
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 0px !important;
+    }
+    .buttonpostiionsidjoa{
+        padding: 24px;
+    }
+
+}
