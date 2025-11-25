@@ -15,7 +15,13 @@
     font-family: 'manrope';
     src: url(./fonts/Manrope-VariableFont_wght.ttf);
 }
-
+.text_line{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
 
 h1 {
 display: block;
