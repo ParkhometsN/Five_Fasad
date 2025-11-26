@@ -1,5 +1,6 @@
 body{
     margin: 0 auto;
+    max-width: 1440px;
     background-color: var(--black);
     font-family: "coolvetregular";
     color: white;
@@ -20,6 +21,7 @@ nav{
 :root{
     --prymary: #E75E0E;
     --prymary-hover: #e75e0e52;
+     --black-hover: #1d1d1d52;
     --black: #171717;
     --black2: #1D1D1D;
     --black3: #252525;
