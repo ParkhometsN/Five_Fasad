@@ -59,6 +59,7 @@
 .our_stuff{
         padding: 7vw 6vw;
 }
+
 .portfolio_block{
     padding: 20px;
 }
@@ -434,6 +435,31 @@ box-shadow:
     display: flex;
     gap: 16px;
 }
+.our_partners_content{
+ display: flex;
+ flex-direction: column;
+ gap: 16px;
+}
+
+.our_partners{
+    display: flex;
+    gap: 1vw;
+}
+.our_partners_container{
+    height: 100%;
+    padding: 0vw 2vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.our_partners img{
+    width: 42vw;
+}
+
+
+
 
 
 
@@ -492,9 +518,24 @@ box-shadow:
         padding: 90px 20px 20px 20px !important;
         
     }
+    .our_partners img{
+        width: 86vw;
+    }
+    .our_partners{
+        flex-direction: column;
+    }
     .hero_container{
         background-image: url(/src/assests/img/indeximg/background_index_mobile.png) !important;
     }
+    .our_partners_container{
+    height: 100%;
+    padding: 0vw 0vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
     .right_hero {
     display: none !important;
 }
