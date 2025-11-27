@@ -195,11 +195,11 @@
 @media screen and (max-width: 540px) {
     .chat-window {
         position: fixed;
-        bottom: 100px;
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
         width: 90%;
-        height: 70%;
+        height: 86vh;
         background: var(--black2);
         border-radius: 24px;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.22);

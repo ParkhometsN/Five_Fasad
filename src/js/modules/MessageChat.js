@@ -28,7 +28,7 @@ export function MessageChat() {
         setupEventListeners();
         initSocket();
         setupScrollBehavior();
-        setupResponsiveButton(); // Добавляем обработку responsive кнопки
+        setupResponsiveButton();
         
         window.toggleChat = toggleChat;
         window.sendMessage = sendMessage;
@@ -71,14 +71,13 @@ export function MessageChat() {
             messageInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     sendMessage();
-                    e.preventDefault(); // Предотвращаем перенос строки
+                    e.preventDefault();
                 }
             });
 
             messageInput.addEventListener('input', handleTyping);
         }
 
-        // Обработчик изменения размера окна для responsive кнопки
         window.addEventListener('resize', setupResponsiveButton);
 
         document.addEventListener('click', (e) => {
@@ -93,7 +92,6 @@ export function MessageChat() {
         });
     }
 
-    // Новая функция для управления видимостью кнопки
     function setupResponsiveButton() {
         const sendButton = document.getElementById(config.selectors.sendButton.slice(1));
         if (!sendButton) return;
@@ -105,7 +103,11 @@ export function MessageChat() {
         }
     }
 
-    // Остальные функции остаются без изменений
+    // Новая функция для проверки мобильного устройства
+    function isMobileDevice() {
+        return window.innerWidth <= 540;
+    }
+
     function initSocket() {
         try {
             socket = io(config.socketUrl);
@@ -187,12 +189,24 @@ export function MessageChat() {
             if (chatElement) {
                 chatElement.style.transform = 'translateX(-50%) translateY(0)';
                 chatElement.style.opacity = '1';
+                
+                // Скрываем кнопку чата на мобильных устройствах при открытии
+                if (isMobileDevice()) {
+                    chatElement.style.display = 'none';
+                }
             }
         } else {
             const currentScroll = window.scrollY;
-            if (chatElement && currentScroll > 100) {
-                chatElement.style.transform = 'translateX(-50%) translateY(100px)';
-                chatElement.style.opacity = '0';
+            if (chatElement) {
+                // Показываем кнопку чата при закрытии (только на мобильных)
+                if (isMobileDevice()) {
+                    chatElement.style.display = 'block';
+                }
+                
+                if (currentScroll > 100) {
+                    chatElement.style.transform = 'translateX(-50%) translateY(100px)';
+                    chatElement.style.opacity = '0';
+                }
             }
         }
         
