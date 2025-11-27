@@ -1,34 +1,264 @@
 export function MessageChat() {
     const ContainerMessageChat = document.querySelector('.message_chat');
-    const MessageChatHtml = `
-        <div class="message_chat_container stroke_main">
-            <div class="message_chat_content">
-                <div class="openchat">
-                    <img src="./src/assests/svg/chat.svg" alt="иконка для чата">
-                    <h4>Чат с менеджером</h4>
+    
+    if (!ContainerMessageChat) {
+        console.warn('Message chat container not found');
+        return;
+    }
+
+    const config = {
+        socketUrl: 'http://localhost:3000',
+        selectors: {
+            chatWindow: '#chatWindow',
+            chatMessages: '#chatMessages', 
+            messageInput: '#messageInput',
+            typingIndicator: '#typing',
+            sendButton: '#sendButton'
+        }
+    };
+
+    let isOpen = false;
+    let lastScroll = 0;
+    let typingTimer;
+    let socket;
+    let chatElement;
+
+    function init() {
+        renderHTML();
+        setupEventListeners();
+        initSocket();
+        setupScrollBehavior();
+        setupResponsiveButton(); // Добавляем обработку responsive кнопки
+        
+        window.toggleChat = toggleChat;
+        window.sendMessage = sendMessage;
+    }
+
+    function renderHTML() {
+        const MessageChatHtml = `
+            <div class="message_chat_container stroke_main">
+                <div onclick="toggleChat()" class="message_chat_content">
+                    <div class="openchat">
+                        <img src="./src/assests/svg/chat.svg" alt="иконка для чата">
+                        <h4>Чат с менеджером</h4>
+                    </div>
+                </div>
+                <a href="tel:+77778889900">
+                    <button class="phonecall"><img src="./src/assests/svg/phone.svg" alt="иконка телефона"></button>
+                </a>
+            </div>
+            <div class="chat-window" id="chatWindow">
+                <div class="chat-header">
+                    <strong>Чат с менеджером</strong>
+                    <button class="close-btn" onclick="toggleChat()">×</button>
+                </div>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Напишите сообщение..." autocomplete="off">
+                    <button id="sendButton" onclick="sendMessage()">Отправить</button>
                 </div>
             </div>
-            <a href="tel:+77778889900">
-                <button class="phonecall"><img src="./src/assests/svg/phone.svg" alt="иконка телефона"></button>
-            </a>
-        </div>
-    `;
-    ContainerMessageChat.innerHTML = MessageChatHtml;
-
-    let lastScroll = 0;
-    const element = ContainerMessageChat.querySelector('.message_chat_container');
-
-    window.addEventListener('scroll', function() {
-        const currentScroll = window.scrollY;
+        `;
+        ContainerMessageChat.innerHTML = MessageChatHtml;
         
-        if (currentScroll > lastScroll && currentScroll > 100) {
-            element.style.transform = 'translateX(-50%) translateY(100px)';
-            element.style.opacity = '0';
+        chatElement = ContainerMessageChat.querySelector('.message_chat_container');
+    }
+
+    function setupEventListeners() {
+        const messageInput = document.getElementById(config.selectors.messageInput.slice(1));
+        
+        if (messageInput) {
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                    e.preventDefault(); // Предотвращаем перенос строки
+                }
+            });
+
+            messageInput.addEventListener('input', handleTyping);
+        }
+
+        // Обработчик изменения размера окна для responsive кнопки
+        window.addEventListener('resize', setupResponsiveButton);
+
+        document.addEventListener('click', (e) => {
+            const chatWindow = document.querySelector(config.selectors.chatWindow);
+            const chatContainer = document.querySelector('.message_chat_container');
+            
+            if (isOpen && 
+                !chatWindow.contains(e.target) && 
+                !chatContainer.contains(e.target)) {
+                toggleChat();
+            }
+        });
+    }
+
+    // Новая функция для управления видимостью кнопки
+    function setupResponsiveButton() {
+        const sendButton = document.getElementById(config.selectors.sendButton.slice(1));
+        if (!sendButton) return;
+
+        if (window.innerWidth <= 540) {
+            sendButton.style.display = 'none';
         } else {
-            element.style.transform = 'translateX(-50%) translateY(0)';
-            element.style.opacity = '1';
+            sendButton.style.display = 'block';
+        }
+    }
+
+    // Остальные функции остаются без изменений
+    function initSocket() {
+        try {
+            socket = io(config.socketUrl);
+
+            let clientId = localStorage.getItem('chatClientId');
+            if (!clientId) {
+                clientId = 'cid_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+                localStorage.setItem('chatClientId', clientId);
+            }
+
+            socket.on('connect', () => {
+                socket.emit('identify', clientId);
+            });
+
+            socket.on('manager_message', (text) => {
+                addMessage(text, 'manager');
+                removeTypingIndicator();
+            });
+
+            socket.on('typing', (isTyping) => {
+                if (isTyping) {
+                    showTypingIndicator();
+                } else {
+                    removeTypingIndicator();
+                }
+            });
+
+            socket.on('disconnect', () => {
+                console.log('Socket disconnected');
+            });
+
+            socket.on('error', (error) => {
+                console.error('Socket error:', error);
+            });
+
+        } catch (error) {
+            console.error('Socket initialization error:', error);
+        }
+    }
+
+    function setupScrollBehavior() {
+        if (!chatElement) return;
+
+        window.addEventListener('scroll', function() {
+            if (isOpen) {
+                chatElement.style.transform = 'translateX(-50%) translateY(0)';
+                chatElement.style.opacity = '1';
+                return;
+            }
+
+            const currentScroll = window.scrollY;
+            
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                chatElement.style.transform = 'translateX(-50%) translateY(100px)';
+                chatElement.style.opacity = '0';
+            } else {
+                chatElement.style.transform = 'translateX(-50%) translateY(0)';
+                chatElement.style.opacity = '1';
+            }
+            
+            lastScroll = currentScroll;
+        });
+    }
+
+    function toggleChat() {
+        const chatWindow = document.getElementById(config.selectors.chatWindow.slice(1));
+        if (!chatWindow) return;
+
+        isOpen = !isOpen;
+        chatWindow.style.display = isOpen ? 'flex' : 'none';
+        
+        if (isOpen) {
+            const messageInput = document.getElementById(config.selectors.messageInput.slice(1));
+            const chatMessages = document.getElementById(config.selectors.chatMessages.slice(1));
+            
+            if (messageInput) messageInput.focus();
+            if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            if (chatElement) {
+                chatElement.style.transform = 'translateX(-50%) translateY(0)';
+                chatElement.style.opacity = '1';
+            }
+        } else {
+            const currentScroll = window.scrollY;
+            if (chatElement && currentScroll > 100) {
+                chatElement.style.transform = 'translateX(-50%) translateY(100px)';
+                chatElement.style.opacity = '0';
+            }
         }
         
-        lastScroll = currentScroll;
-    });
+        if (socket) {
+            socket.emit('chat_opened');
+        }
+    }
+
+    function addMessage(text, sender) {
+        const chatMessages = document.getElementById(config.selectors.chatMessages.slice(1));
+        if (!chatMessages) return;
+
+        const div = document.createElement('div');
+        div.className = 'message ' + (sender === 'user' ? 'user-message' : 'manager-message');
+        div.textContent = text;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+        removeTypingIndicator();
+        
+        const chatMessages = document.getElementById(config.selectors.chatMessages.slice(1));
+        if (!chatMessages) return;
+
+        const div = document.createElement('div');
+        div.className = 'typing-indicator';
+        div.textContent = 'Менеджер печатает...';
+        div.id = config.selectors.typingIndicator.slice(1);
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const typing = document.getElementById(config.selectors.typingIndicator.slice(1));
+        if (typing) typing.remove();
+    }
+
+    function sendMessage() {
+        const messageInput = document.getElementById(config.selectors.messageInput.slice(1));
+        if (!messageInput) return;
+
+        const msg = messageInput.value.trim();
+        if (!msg) return;
+
+        addMessage(msg, 'user');
+        messageInput.value = '';
+        
+        if (socket) {
+            socket.emit('send_message', msg);
+        }
+    }
+
+    function handleTyping() {
+        if (!socket) return;
+
+        socket.emit('typing', true);
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(() => socket.emit('typing', false), 800);
+    }
+
+    init();
+
+    return {
+        toggleChat,
+        sendMessage,
+        addMessage
+    };
 }

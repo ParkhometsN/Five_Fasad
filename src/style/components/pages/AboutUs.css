@@ -436,7 +436,7 @@ justify-content: flex-end;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 850px;
+height: 550px;
 }
 .stuff_list{
     padding: 30px 0px 0px 0px;
@@ -488,4 +488,32 @@ justify-content: flex-end;
     justify-content: space-between;
     align-items: flex-start;
 }
+}
+
+@media screen and (max-width: 450px){
+        .lfbl img, .rght img {
+    width: 100%;
+    height: 40vw !important;
+    border-radius: 16px;
+    object-fit: cover;
+}
+.inf {
+    display: flex
+;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 16px;
+}
+.checkbox h4 {
+    width: 100%;
+}
+.about_textarea {
+    height: 46vw;
+}
+.about_our_contentt h1 {
+        font-size: 37px;
+    }
+    .text_of_adventech h3{
+        font-size: 20px;
+    }
 }

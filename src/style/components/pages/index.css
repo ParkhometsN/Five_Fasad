@@ -216,7 +216,7 @@
     justify-content: center;
     align-items: center;
 }
-.tt h3{
+.tt h4{
     width: 30vw;
 }
 .customFaq{
@@ -616,9 +616,53 @@ box-shadow:
     align-items: center;
     flex-direction: column;
 }
+.our_partners_content {
+    display: flex
+;
+    flex-direction: column;
+    gap: 16px;
+            width: 85vw;
+    align-items: center;
+}
+.blsvg img{
+ width: 30vw;
+}
+.logosvggg img{
+    width: 32vw;
+}
+.tt h4 {
+    width: 100%;
+}
+.title_of_block {
+    padding: 0px;
+    display: flex
+;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 21px;
+}
+.illustration {
+    padding: 20px;
+    display: flex
+;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .titletext_translatorrr{
     flex-direction: column;
     gap: 26px;
+}
+.linkbutton {
+    display: flex
+;
+    gap: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.title_wichcpount h1{
+    font-size: 30px;
 }
 .qwefqwfqwf h4{
     width: 100%;
@@ -677,6 +721,12 @@ box-shadow:
     .listpotolok,
     .title_hero h3{
         display: none !important;
+    }
+    .titmecccc h5{
+        display: none;
+    }
+    .threlineinf a h5{
+        font-size: 13px !important;
     }
 
     

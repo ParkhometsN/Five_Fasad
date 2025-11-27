@@ -16,16 +16,16 @@
     bottom: 15px;             
     transform: translateX(-50%);
     pointer-events: auto; 
-    pointer-events: none;   
     background-color: var(--black2);
     border-radius: 53px;
-    padding: 5px;
+    padding: 7px;
     width: 487px;
     height: 50px;
     transition: all 0.5s ease;
     opacity: 1;
 }
 .openchat{
+
     padding-left: 20px;
     display: flex;
     align-items: center;
@@ -36,12 +36,18 @@
         font-family: "Cygre";
 }
 .message_chat_content{
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     background-color: var(--black);
     border-radius: 45px;
+    transition: all 0.3s ease;
+    border: 2px transparent solid;
     height: 100%;
     width: 100%;
+}
+.message_chat_content:hover{
+    border: 2px var(--prymary) solid;
 }
 .phonecall{
     margin-right: 5px;
@@ -63,5 +69,152 @@
 @media screen and (max-width: 834px){
     .message_chat_container {
         width: 87vw;
+    }
+}
+
+
+.chat-widget{position:fixed;bottom:20px;right:20px;z-index:10000;}
+        .chat-button{background:#007bff;color:white;border:none;padding:15px 20px;border-radius:50px;cursor:pointer;box-shadow:0 4px 20px rgba(0,123,255,0.3);font-size:16px;transition:.2s;}
+        .chat-button:hover{background:#0056b3;}
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 496px;
+            height: 520px;
+            background: var(--black2);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.22);
+            display: none;
+            flex-direction: column;
+            border: 2px solid var(--black3);
+            overflow: hidden;
+            font-family: system-ui, -apple-system, Arial, sans-serif;
+        }
+        .chat-header {
+    background: var(--black2);
+    color: white;
+    padding: 16px;
+    border-radius: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 17px;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    background: var(--black2);
+}
+
+.message {
+    margin-bottom: 12px;
+    padding: 10px 16px;
+    border-radius: 18px;
+    max-width: 80%;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+.user-message {
+    background: var(--black);
+    color: white;
+    border: 1.5px var(--prymary-hover) solid;
+    margin-left: auto;
+}
+
+.manager-message {
+    background: var(--prymary);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.chat-input {
+    display: flex;
+    padding: 12px;
+    background: var(--black2);
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    background-color: var(--black);
+    padding: 12px 18px;
+    border: 1px solid var(--black3);
+    border-radius: 30px;
+    color: white;
+    outline: none;
+    font-size: 15px;
+}
+
+.chat-input input:focus {
+    border-color: var(--prymary);
+}
+
+.chat-input button {
+    background: var(--prymary);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.chat-input button:hover {
+    background: #0056b3;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.typing-indicator {
+    color: #888;
+    font-size: 14px;
+    font-style: italic;
+    margin: 10px 0;
+}
+#sendButton {
+    transition: opacity 0.3s ease;
+}
+
+
+
+
+
+@media screen and (max-width: 540px) {
+    .chat-window {
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        height: 70%;
+        background: var(--black2);
+        border-radius: 24px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.22);
+        display: none;
+        flex-direction: column;
+        border: 2px solid var(--black3);
+        overflow: hidden;
+        font-family: system-ui, -apple-system, Arial, sans-serif;
+    }
+
+    #sendButton {
+        display: none !important;
+    }
+
+    #messageInput {
+        font-size: 16px;
     }
 }

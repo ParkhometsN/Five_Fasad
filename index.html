@@ -137,35 +137,35 @@
                             <div class="questions">
                                 <div class="question">
                                     <div class="question_container">
-                                        <div onclick="question()" class="question_content stroke_mainhover">
+                                        <div class="question_content stroke_mainhover">
                                             <div class="ltcon">
                                                 <img src="./src/assests/svg/search_icon.svg" alt="иконка лупы">
                                                 <h4>Консультация, замер и точный расчет</h4>
                                             </div>
                                             <img src="./src/assests/svg/plus-icon.svg" alt="иконка">
                                         </div>
-                                        <div onclick="question()" class="question_content stroke_mainhover">
+                                        <div class="question_content stroke_mainhover">
                                             <div class="ltcon">
                                                 <img src="./src/assests/svg/search_icon.svg" alt="иконка лупы">
                                                 <h4>Проектирование и заключение договора</h4>
                                             </div>
                                             <img src="./src/assests/svg/plus-icon.svg" alt="иконка">
                                         </div>
-                                        <div onclick="question()" class="question_content stroke_mainhover">
+                                        <div class="question_content stroke_mainhover">
                                             <div class="ltcon">
                                                 <img src="./src/assests/svg/search_icon.svg" alt="иконка лупы">
                                                 <h4>Подготовка и изготовление</h4>
                                             </div>
                                             <img src="./src/assests/svg/plus-icon.svg" alt="иконка">
                                         </div>
-                                        <div onclick="question()" class="question_content stroke_mainhover">
+                                        <div class="question_content stroke_mainhover">
                                             <div class="ltcon">
                                                 <img src="./src/assests/svg/search_icon.svg" alt="иконка лупы">
                                                 <h4>Профессиональный монтаж</h4>
                                             </div>
                                             <img src="./src/assests/svg/plus-icon.svg" alt="иконка">
                                         </div>
-                                        <div onclick="question()" class="question_content stroke_mainhover">
+                                        <div class="question_content stroke_mainhover">
                                             <div class="ltcon">
                                                 <img src="./src/assests/svg/search_icon.svg" alt="иконка лупы">
                                                 <h4>Сдача работы и гарантия</h4>
@@ -180,7 +180,7 @@
                             <div class="rg_container">
                                 <div class="content_rg">
                                     <div class="tt">
-                                        <h3>Мы постоянно развиваемся, совершенствуемся, внедряем что-то новое, следим за результатами и принимаем решение, на правильном ли пути мы находимся. Такой подход позволяет компании «ПЯТЫЙ ФАСАД» и заказчику выстроить процесс намного эффективнее.</h3>
+                                        <h4>Мы постоянно развиваемся, совершенствуемся, внедряем что-то новое, следим за результатами и принимаем решение, на правильном ли пути мы находимся. Такой подход позволяет компании «ПЯТЫЙ ФАСАД» и заказчику выстроить процесс намного эффективнее.</h4>
                                         <img src="./src/assests/img/indeximg/maskot_faq.png" alt="маскот пятого фасада">
                                     </div>
                                     <button class="black_button customFaq"><h4>связаться</h4></button>
@@ -342,8 +342,18 @@
         <footer id="footer_item"></footer>
     </div>
 </body>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 <script type="module" src="/src/js/main.js"></script>
 <script>
-  AOS.init();
+  if (window.innerWidth <= 768) { // или нужное вам значение
+    AOS.init({
+        disable: true
+    });
+  } else {
+    AOS.init({
+        duration: 1000,
+        once: true
+    });
+  }
 </script>
 </html>
