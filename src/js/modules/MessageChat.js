@@ -103,7 +103,6 @@ export function MessageChat() {
         }
     }
 
-    // Новая функция для проверки мобильного устройства
     function isMobileDevice() {
         return window.innerWidth <= 540;
     }
@@ -152,11 +151,8 @@ export function MessageChat() {
         if (!chatElement) return;
 
         window.addEventListener('scroll', function() {
-            if (isOpen) {
-                chatElement.style.transform = 'translateX(-50%) translateY(0)';
-                chatElement.style.opacity = '1';
-                return;
-            }
+            // Если чат открыт - не трогаем кнопку
+            if (isOpen) return;
 
             const currentScroll = window.scrollY;
             
@@ -172,6 +168,7 @@ export function MessageChat() {
         });
     }
 
+    // ГЛАВНАЯ ФУНКЦИЯ — ПОЛНОСТЬЮ ПЕРЕПИСАНА ДЛЯ МОБИЛЬНЫХ
     function toggleChat() {
         const chatWindow = document.getElementById(config.selectors.chatWindow.slice(1));
         if (!chatWindow) return;
@@ -185,27 +182,30 @@ export function MessageChat() {
             
             if (messageInput) messageInput.focus();
             if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
-            
-            if (chatElement) {
-                chatElement.style.transform = 'translateX(-50%) translateY(0)';
-                chatElement.style.opacity = '1';
-                
-                // Скрываем кнопку чата на мобильных устройствах при открытии
-                if (isMobileDevice()) {
-                    chatElement.style.display = 'none';
-                }
+
+            // На мобильных полностью скрываем нижнюю кнопку (чат + телефон)
+            if (isMobileDevice() && chatElement) {
+                chatElement.style.display = 'none';
             }
+
+            // Дополнительный скролл в самый низ (важно после появления клавиатуры)
+            setTimeout(() => {
+                if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 300);
+
         } else {
-            const currentScroll = window.scrollY;
-            if (chatElement) {
-                // Показываем кнопку чата при закрытии (только на мобильных)
-                if (isMobileDevice()) {
-                    chatElement.style.display = 'block';
-                }
-                
+            // При закрытии возвращаем кнопку
+            if (isMobileDevice() && chatElement) {
+                chatElement.style.display = 'flex';
+
+                // Восстанавливаем состояние в зависимости от скролла страницы
+                const currentScroll = window.scrollY;
                 if (currentScroll > 100) {
                     chatElement.style.transform = 'translateX(-50%) translateY(100px)';
                     chatElement.style.opacity = '0';
+                } else {
+                    chatElement.style.transform = 'translateX(-50%) translateY(0)';
+                    chatElement.style.opacity = '1';
                 }
             }
         }

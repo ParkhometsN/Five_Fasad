@@ -25,7 +25,7 @@ export function GetFooter(){
                                 </div>
                                 <div style="padding-top: 20px;" class="secline">
                                     <img src="./src/assests/svg/icon_partner_five.svg" alt="партнеры пятого фасада">
-                                    <button class="black_button icon_custom"><img src="./src/assests/svg/plus.svg"><h4>Стать партнером</h4></button>
+                                    <a href='AboutUs.html#partners'><button class="black_button icon_custom"><img src="./src/assests/svg/plus.svg"><h4>Стать партнером</h4></button></a>
                                 </div>
                             </div>
                         </div>
