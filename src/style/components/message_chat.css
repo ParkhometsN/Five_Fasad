@@ -189,113 +189,18 @@
 }
 
 @media screen and (max-width: 540px) {
-    .message_chat_container {
-        width: 87vw;
-    }
-
-    .chat-window {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        height: 100dvh !important;
-        max-height: 100dvh !important;
-        transform: none !important;
-        border-radius: 0 !important;
-        border: none !important;
-    }
-
-    .chat-header {
-        padding: 20px 16px 16px !important;
-        padding-top: max(20px, env(safe-area-inset-top)) !important;
-        border-radius: 0 !important;
-    }
-
-    .chat-input {
-        padding: 16px !important;
-        padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
-    }
-
-    .chat-messages {
-        padding: 16px;
-        padding-bottom: 20px;
-    }
-
-    #sendButton {
-        display: none !important;
-    }
-
-    #messageInput {
+    .mobile-native-input textarea {
         font-size: 16px !important;
+        transform: scale(1);
+        transform-origin: left top;
     }
-}
-
-/* Скрываем десктопный инпут на мобилке и наоборот */
-.desktop-only {
-    display: flex;
-}
-
-.mobile-native-input {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: var(--black2);
-    padding: 12px 16px;
-    padding-bottom: max(16px, env(safe-area-inset-bottom));
-    border-top: 1px solid var(--black3);
-    gap: 12px;
-    z-index: 100001;
-}
-
-.mobile-native-input textarea {
-    flex: 1;
-    background: var(--black);
-    color: white;
-    border: 1px solid var(--black3);
-    border-radius: 24px;
-    padding: 14px 18px;
-    font-size: 16px !important;     /* КЛЮЧЕВОЕ: без этого iOS зумит при фокусе */
-    resize: none;
-    outline: none;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    min-height: 20px;
-    max-height: 120px;
-}
-
-.mobile-native-input textarea:focus {
-    border-color: var(--prymary);
-}
-
-.mobile-send-btn {
-    background: var(--prymary);
-    color: white;
-    border: none;
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@media screen and (max-width: 540px) {
-    .desktop-only {
-        display: none !important;
-    }
-
-    .mobile-native-input {
-        display: flex !important;
-    }
-
-    .chat-messages {
-        padding-bottom: 90px !important; /* место под нативный инпут */
-    }
-
-    /* Это главное — без этого будет прыгать */
+    
     .chat-window {
-        padding-bottom: 0 !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .chat-messages {
+        padding-bottom: 90px !important;
+        overflow-anchor: auto;
     }
 }
