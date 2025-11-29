@@ -11,6 +11,11 @@ html{
     overflow-x:  hidden;
     overflow-y:  auto;
 }
+html, body {
+  height: 100%;
+  overscroll-behavior-y: contain; /* уменьшает «перекатывание» на iOS/Android */
+}
+
 a{
     color: white;
     text-decoration: none;

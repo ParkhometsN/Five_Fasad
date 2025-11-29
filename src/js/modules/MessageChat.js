@@ -29,13 +29,14 @@ export function MessageChat() {
         initSocket();
         setupScrollBehavior();
         setupResponsiveButton();
+        setupMobileInputBehavior(); // — MOBILE FIX: add listeners for mobile textarea + visualViewport handling
         
         window.toggleChat = toggleChat;
         window.sendMessage = sendMessage;
     }
 
-function renderHTML() {
-    const isMobile = window.innerWidth <= 540;
+    function renderHTML() {
+        const isMobile = window.innerWidth <= 540;
 
         const mobileInput = isMobile ? `
             <div class="mobile-native-input">
@@ -78,6 +79,7 @@ function renderHTML() {
         
         chatElement = ContainerMessageChat.querySelector('.message_chat_container');
     }
+
     function setupEventListeners() {
         const messageInput = document.getElementById(config.selectors.messageInput.slice(1));
         
@@ -92,6 +94,21 @@ function renderHTML() {
             messageInput.addEventListener('input', handleTyping);
         }
 
+        // Поддержка мобильного textarea: Enter без Shift отправляет (опционально),
+        // но мы оставляем перенос строки при Shift+Enter.
+        const mobileTextarea = document.getElementById('mobileMessageInput');
+        if (mobileTextarea) {
+            mobileTextarea.addEventListener('keydown', (e) => {
+                // если хотим, чтобы Enter отправлял (обычно в мессенджерах) — используем:
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            mobileTextarea.addEventListener('input', handleTyping);
+        }
+
         window.addEventListener('resize', setupResponsiveButton);
 
         document.addEventListener('click', (e) => {
@@ -99,8 +116,8 @@ function renderHTML() {
             const chatContainer = document.querySelector('.message_chat_container');
             
             if (isOpen && 
-                !chatWindow.contains(e.target) && 
-                !chatContainer.contains(e.target)) {
+                chatWindow && !chatWindow.contains(e.target) && 
+                chatContainer && !chatContainer.contains(e.target)) {
                 toggleChat();
             }
         });
@@ -257,8 +274,9 @@ function renderHTML() {
         if (typing) typing.remove();
     }
 
+    // Универсальная отправка: сначала ищем десктопный input, иначе mobile textarea.
     function sendMessage() {
-        const messageInput = document.getElementById(config.selectors.messageInput.slice(1));
+        const messageInput = document.getElementById('messageInput') || document.getElementById('mobileMessageInput');
         if (!messageInput) return;
 
         const msg = messageInput.value.trim();
@@ -270,6 +288,14 @@ function renderHTML() {
         if (socket) {
             socket.emit('send_message', msg);
         }
+
+        // после отправки прокручиваем сообщения (особенно важно на мобилке)
+        const chatMessages = document.getElementById(config.selectors.chatMessages.slice(1));
+        if (chatMessages) {
+            setTimeout(() => {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 50);
+        }
     }
 
     function handleTyping() {
@@ -279,6 +305,86 @@ function renderHTML() {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(() => socket.emit('typing', false), 800);
     }
+
+    /* ================= MOBILE FIX: prevent page jump on iOS when keyboard opens ================= */
+
+    function setupMobileInputBehavior() {
+        if (!isMobileDevice()) return;
+
+        const mobileTextarea = document.getElementById('mobileMessageInput');
+        const chatWindow = document.getElementById('chatWindow');
+        const chatMessages = document.getElementById('chatMessages');
+
+        if (!mobileTextarea) return;
+
+        let savedScrollY = 0;
+
+        function onFocus() {
+            // save current scroll position and fix body to prevent pan
+            savedScrollY = window.scrollY || window.pageYOffset || 0;
+
+            // apply inline styles to lock page
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${savedScrollY}px`;
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+            document.body.style.width = '100%';
+
+            // small delay then scroll messages to bottom so the last messages are visible
+            setTimeout(() => {
+                if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 50);
+        }
+
+        function onBlur() {
+            // remove inline styles and restore scroll
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
+            document.body.style.width = '';
+
+            // restore scroll position without smooth behavior
+            const prev = document.documentElement.style.scrollBehavior;
+            document.documentElement.style.scrollBehavior = 'auto';
+            window.scrollTo(0, savedScrollY);
+            // restore scroll-behavior if there was any
+            setTimeout(() => {
+                document.documentElement.style.scrollBehavior = prev || '';
+            }, 50);
+
+            // reset visual adjustments
+            const nativeInput = document.querySelector('.mobile-native-input');
+            if (nativeInput) nativeInput.style.transform = '';
+            if (chatMessages) chatMessages.style.paddingBottom = '';
+        }
+
+        mobileTextarea.addEventListener('focus', onFocus);
+        mobileTextarea.addEventListener('blur', onBlur);
+
+        // visualViewport: adjust bottom padding/transform when keyboard opens (iOS Safari)
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('resize', () => {
+                const vv = window.visualViewport;
+                // keyboard height approx:
+                const keyboardHeight = Math.max(0, window.innerHeight - vv.height);
+                const nativeInput = document.querySelector('.mobile-native-input');
+
+                if (keyboardHeight > 0) {
+                    // move native input up visually so it stays above keyboard
+                    if (nativeInput) nativeInput.style.transform = `translateY(-${keyboardHeight}px)`;
+                    // add padding to chat messages so last messages are visible above keyboard + input
+                    if (chatMessages) chatMessages.style.paddingBottom = `${keyboardHeight + 120}px`;
+                    if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+                } else {
+                    if (nativeInput) nativeInput.style.transform = '';
+                    if (chatMessages) chatMessages.style.paddingBottom = '';
+                }
+            });
+        }
+    }
+
+    /* =============================================================================================== */
 
     init();
 
