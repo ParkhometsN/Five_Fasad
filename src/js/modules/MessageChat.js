@@ -34,36 +34,50 @@ export function MessageChat() {
         window.sendMessage = sendMessage;
     }
 
-    function renderHTML() {
+function renderHTML() {
+    const isMobile = window.innerWidth <= 540;
+
+        const mobileInput = isMobile ? `
+            <div class="mobile-native-input">
+                <textarea id="mobileMessageInput" placeholder="Напишите сообщение..." rows="1"></textarea>
+                <button onclick="sendMessage()" class="mobile-send-btn">Send</button>
+            </div>
+        ` : '';
+
         const MessageChatHtml = `
             <div class="message_chat_container stroke_main">
                 <div onclick="toggleChat()" class="message_chat_content">
                     <div class="openchat">
-                        <img src="./src/assests/svg/chat.svg" alt="иконка для чата">
+                        <img src="./src/assests/svg/chat.svg" alt="чат">
                         <h4>Чат с менеджером</h4>
                     </div>
                 </div>
                 <a href="tel:+77778889900">
-                    <button class="phonecall"><img src="./src/assests/svg/phone.svg" alt="иконка телефона"></button>
+                    <button class="phonecall"><img src="./src/assests/svg/phone.svg" alt="телефон"></button>
                 </a>
             </div>
+
             <div class="chat-window" id="chatWindow">
                 <div class="chat-header">
                     <strong>Чат с менеджером</strong>
                     <button class="close-btn" onclick="toggleChat()">×</button>
                 </div>
                 <div class="chat-messages" id="chatMessages"></div>
-                <div class="chat-input">
+
+                <!-- Десктопный инпут (скрыт на мобилке) -->
+                <div class="chat-input desktop-only">
                     <input type="text" id="messageInput" placeholder="Напишите сообщение..." autocomplete="off">
                     <button id="sendButton" onclick="sendMessage()">Отправить</button>
                 </div>
+
+                <!-- Мобильный нативный инпут (показывается только на мобилке) -->
+                ${mobileInput}
             </div>
         `;
         ContainerMessageChat.innerHTML = MessageChatHtml;
         
         chatElement = ContainerMessageChat.querySelector('.message_chat_container');
     }
-
     function setupEventListeners() {
         const messageInput = document.getElementById(config.selectors.messageInput.slice(1));
         
@@ -168,7 +182,7 @@ export function MessageChat() {
         });
     }
 
-    // ГЛАВНАЯ ФУНКЦИЯ — ПОЛНОСТЬЮ ПЕРЕПИСАНА ДЛЯ МОБИЛЬНЫХ
+
     function toggleChat() {
         const chatWindow = document.getElementById(config.selectors.chatWindow.slice(1));
         if (!chatWindow) return;
@@ -183,22 +197,20 @@ export function MessageChat() {
             if (messageInput) messageInput.focus();
             if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // На мобильных полностью скрываем нижнюю кнопку (чат + телефон)
+
             if (isMobileDevice() && chatElement) {
                 chatElement.style.display = 'none';
             }
 
-            // Дополнительный скролл в самый низ (важно после появления клавиатуры)
             setTimeout(() => {
                 if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
             }, 300);
 
         } else {
-            // При закрытии возвращаем кнопку
+
             if (isMobileDevice() && chatElement) {
                 chatElement.style.display = 'flex';
 
-                // Восстанавливаем состояние в зависимости от скролла страницы
                 const currentScroll = window.scrollY;
                 if (currentScroll > 100) {
                     chatElement.style.transform = 'translateX(-50%) translateY(100px)';
