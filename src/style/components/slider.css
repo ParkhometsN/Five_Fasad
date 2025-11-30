@@ -1,23 +1,172 @@
-.slider_open_card{
+.slider_open_card {
     display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
-.slider_container{
+
+.slider_open_card.active {
+    display: block;
+    opacity: 1;
+}
+
+.slider_backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+/* Основной контейнер слайдера */
+.slider_container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100vw - 40px);  /* 20px слева + 20px справа */
+    max-width: 1920px;
+    height: 90vh;
+    border: 1.5px var(--prymary) solid;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+}
+
+/* Обертка для слайдов */
+.slider_wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 6px;
+}
+
+.slider_track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slider_track img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+    user-select: none;
+    pointer-events: none;
+    border-radius: 16px;
+}
+
+/* Кнопка закрытия */
+.slider_close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: var(--prymary);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    z-index: 20;
+    padding: 10px 20px;
+    border-radius: 24px;
+    color: white;
+    border: none;
+    font-family: "coolvetregular";
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px 0px 4px var(--prymary-hover);
+    transition: all 0.3s;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999999;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: #00000073;
 }
-.slider_content{
-    padding: 10px;
+
+.slider_close:hover {
+    opacity: 0.8;
+}
+
+/* Стрелки — прямо на фото */
+.slider_arrow {
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
     background-color: var(--black2);
-    width: 80vw;
-    height: 80vh;
+    border: none;
+    border-radius: 90%;
+    color: white;
+    font-size: 36px;
+    font-weight: 100;
+    cursor: pointer;
+     padding: 10px 20px;
     border-radius: 24px;
+    color: white;
+    border: none;
+      box-shadow: 0px 0px 0px 4px var(--black-hover);
+    font-family: "coolvetregular";
+    transition: all 0.3s ease;
+        border: 1.5px var(--black3) solid;
+    z-index: 15;
+    transition: all 0.3s;
+}
+
+.slider_arrow:hover {
+    opacity: 0.8;
+}
+.slider_arrow:active {
+    opacity: 0.5;
+}
+
+
+.slider_arrow--prev { left: 20px; }
+.slider_arrow--next { right: 20px; }
+
+/* Точки снизу */
+.slider_dots {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 15;
+}
+
+.slider_dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.slider_dot.active {
+    background: var(--prymary);
+    transform: scale(1.4);
+}
+
+/* Скрываем стрелки на мобильных */
+@media (max-width: 768px) {
+    .slider_arrow { display: none; }
+    .slider_container {
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    .slider_track img {
+        border-radius: 0;
+    }
 }
