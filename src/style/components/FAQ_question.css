@@ -1,0 +1,181 @@
+.question_wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.question_content {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  background-color: var(--black);
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.ltcon {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Кастомная кнопка плюс/минус оранжевого цвета */
+.question_btn {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: plus-animation-reverse 0.5s ease-out forwards;
+}
+
+.question_btn::before,
+.question_btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 2px;
+  background: var(--primary); /* Оранжевый цвет */
+  transition: all 0.3s ease;
+}
+
+.question_btn::before {
+  width: 2px;
+  height: 16px;
+}
+
+.question_btn::after {
+  width: 16px;
+  height: 2px;
+}
+
+/* Тултип */
+.question_tooltip {
+  width: fit-content;
+  max-width: 400px;
+  border-radius: 12px;
+  position: absolute;
+  background: var(--prymary);
+  z-index: 10;
+
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  top: 100%;
+  left: 0;
+  margin-top: 10px;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.question_tooltip > span {
+  display: block;
+  color: white;
+  font-size: 16px;
+  line-height: 1.4;
+      font-family: 'manrope';
+      font-weight: 500;
+  white-space: normal;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.question_tooltip::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: var(--prymary);
+  border-radius: 3px;
+  position: absolute;
+  left: 20px;
+  top: -8px;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* Чекбокс для управления состоянием - растянут на всю кнопку */
+.question_checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+}
+
+/* Анимации при активации (при клике на ЛЮБУЮ часть кнопки) */
+.question_checkbox:checked ~ .question_content .question_btn {
+  animation: plus-animation 0.5s ease-out forwards;
+}
+
+.question_checkbox:checked ~ .question_tooltip {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.question_checkbox:checked ~ .question_tooltip > span {
+  opacity: 1;
+}
+
+/* Анимации для кнопки */
+@keyframes plus-animation {
+  0% {
+    transform: rotate(0) scale(1);
+  }
+  20% {
+    transform: rotate(60deg) scale(0.93);
+  }
+  55% {
+    transform: rotate(35deg) scale(0.97);
+  }
+  80% {
+    transform: rotate(48deg) scale(0.94);
+  }
+  100% {
+    transform: rotate(45deg) scale(0.95);
+  }
+}
+
+@keyframes plus-animation-reverse {
+  0% {
+    transform: rotate(45deg) scale(0.95);
+  }
+  20% {
+    transform: rotate(-15deg);
+  }
+  55% {
+    transform: rotate(10deg);
+  }
+  80% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0) scale(1);
+  }
+}
+
+/* Дополнительные стили для hover эффектов */
+.question_content:hover {
+  background-color: var(--black-hover, #2a2a2a);
+}
+
+
+/* Убедимся, что весь контент кнопки кликабелен */
+.question_content * {
+  pointer-events: none;
+}
+
+.question_checkbox {
+  pointer-events: auto;
+}

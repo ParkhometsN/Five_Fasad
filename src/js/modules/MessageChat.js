@@ -6,7 +6,7 @@ export function MessageChat() {
   }
 
   const config = {
-    socketUrl: 'http://localhost:3000',
+    socketUrl: 'http://localhost:3002',
     selectors: {
       chatWindow: '#chatWindow',
       chatMessages: '#chatMessages',

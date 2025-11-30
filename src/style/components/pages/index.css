@@ -176,29 +176,14 @@
     gap: 16px;
     padding-top: 40px;
 }
-.question_content{
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 .right_content,
 .left_content{
     width: 100%;
 }
-.question_content{
-    border-radius: 10px;
-    background-color: var(--black);
-    padding: 16px;
-}
+
 .left_content{
     padding-right: 70px;
-}
-
-.ltcon{
-    display: flex;
-    gap: 20px;
-    align-items: center;
 }
 
 .rg_container{

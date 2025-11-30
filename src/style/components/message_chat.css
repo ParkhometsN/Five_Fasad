@@ -204,3 +204,17 @@
         overflow-anchor: auto;
     }
 }
+
+
+.system-message {
+    background: #ffeb3b !important;
+    color: #333 !important;
+    border: 2px solid #ffc107;
+    text-align: center;
+    max-width: 90% !important;
+    margin: 10px auto !important;
+    padding: 10px 16px;
+    border-radius: 18px;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
