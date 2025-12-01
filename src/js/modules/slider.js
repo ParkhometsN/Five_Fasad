@@ -1,6 +1,12 @@
 export function initProjectSlider() {
     const triggers = document.querySelectorAll('[data-slider-trigger]');
     const modal = document.querySelector('.slider_open_card');
+
+    if (!modal || triggers.length === 0) {
+        console.warn('Слайдер: не найдены необходимые элементы');
+        return;
+    }
+
     const backdrop = modal.querySelector('.slider_backdrop');
     const container = modal.querySelector('.slider_container');
     const track = modal.querySelector('.slider_track');
@@ -8,6 +14,10 @@ export function initProjectSlider() {
     const prevBtn = modal.querySelector('.slider_arrow--prev');
     const nextBtn = modal.querySelector('.slider_arrow--next');
     const closeBtn = modal.querySelector('.slider_close');
+    if (!backdrop || !container || !track || !dotsContainer || !prevBtn || !nextBtn || !closeBtn) {
+        console.warn('Слайдер: не все элементы найдены внутри модального окна');
+        return;
+    }
 
     let currentIndex = 0;
     let images = [];
@@ -17,11 +27,13 @@ export function initProjectSlider() {
     let currentTranslate = 0;
     let prevTranslate = 0;
 
-    // Открытие по клику на карточку
+
     triggers.forEach(trigger => {
         trigger.addEventListener('click', e => {
             e.preventDefault();
             const imgContainer = trigger.querySelector('.slider_img');
+            if (!imgContainer) return;
+            
             images = Array.from(imgContainer.querySelectorAll('img')).map(img => img.src);
             
             if (images.length === 0) return;
@@ -88,7 +100,6 @@ export function initProjectSlider() {
         track.style.transform = `translateX(${currentTranslate}%)`;
     }
 
-    // === Перетаскивание мышью / одним пальцем ===
     const startDrag = e => {
         isDragging = true;
         startPos = getPositionX(e);
@@ -125,10 +136,9 @@ export function initProjectSlider() {
     container.addEventListener('mouseleave', endDrag);
     container.addEventListener('touchend', endDrag);
 
-    // === ДВУХПАЛЬЦЕВОЕ ЛИСТАНИЕ ПО ТАЧПАДУ ===
     container.addEventListener('wheel', e => {
         if (!modal.classList.contains('active')) return;
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) return; // вертикальный скролл игнорируем
+        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) return;
 
         e.preventDefault();
         clearTimeout(container.wheelTimeout);
@@ -138,13 +148,11 @@ export function initProjectSlider() {
         }, 20);
     }, { passive: false });
 
-    // Навигация
     prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
     nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
     closeBtn.addEventListener('click', closeSlider);
     backdrop.addEventListener('click', closeSlider);
 
-    // Клавиатура
     document.addEventListener('keydown', e => {
         if (!modal.classList.contains('active')) return;
         if (e.key === 'Escape') closeSlider();
@@ -152,6 +160,3 @@ export function initProjectSlider() {
         if (e.key === 'ArrowRight') goToSlide(currentIndex + 1);
     });
 }
-
-// Запуск
-document.addEventListener('DOMContentLoaded', initProjectSlider);

@@ -356,7 +356,7 @@ box-shadow:
 .text_of_card{
     flex-direction: column;
     display: flex;
-    gap: 10px;
+    gap: 0px;
     padding-top: 10px;
 }
 

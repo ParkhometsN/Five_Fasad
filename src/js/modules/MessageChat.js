@@ -9,6 +9,7 @@ export function MessageChat() {
   let lastScroll = 0;
   let socket;
   let chatElement;
+  let welcomeMessageAdded = false; // Флаг, чтобы приветствие добавлялось только один раз
 
   function init() {
     renderHTML();
@@ -115,9 +116,44 @@ export function MessageChat() {
     const clientId = localStorage.getItem('chatClientId') || 'cid_' + Date.now().toString(36);
     localStorage.setItem('chatClientId', clientId);
 
-    socket.on('connect', () => socket.emit('identify', clientId));
+    socket.on('connect', () => {
+      socket.emit('identify', clientId);
+    });
+    
     socket.on('manager_message', (text) => {
       addMessage(text, 'manager');
+    });
+    
+    socket.on('system_message', (text) => {
+      addMessage(text, 'manager');
+    });
+    
+    // Обработчик обновления приветственного сообщения
+    socket.on('update_welcome_message', (newWelcomeMessage) => {
+      const messagesContainer = document.getElementById('chatMessages');
+      if (!messagesContainer) return;
+      
+      const messages = messagesContainer.querySelectorAll('.manager-message');
+      
+      // Если есть сообщения, заменяем последнее приветственное
+      if (messages.length > 0) {
+        const lastMessage = messages[messages.length - 1];
+        
+        // Проверяем, является ли это сообщение приветственным
+        const isWelcomeMessage = lastMessage.textContent.includes('Здравствуйте') || 
+                               lastMessage.textContent.includes('Идут технические работы') ||
+                               lastMessage.textContent.includes('технические работы');
+        
+        if (isWelcomeMessage) {
+          lastMessage.textContent = newWelcomeMessage;
+        } else {
+          // Если последнее сообщение не приветственное, добавляем новое
+          addMessage(newWelcomeMessage, 'manager');
+        }
+      } else {
+        // Если нет сообщений, просто добавляем
+        addMessage(newWelcomeMessage, 'manager');
+      }
     });
   }
 
