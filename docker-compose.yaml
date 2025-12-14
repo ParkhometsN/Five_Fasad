@@ -12,6 +12,15 @@ services:
     networks:
       - fivefasad-network
 
+  php:
+    image: php:8.2-fpm-alpine
+    container_name: fivefasad-php
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/var/www/html:ro
+    networks:
+      - fivefasad-network
+
   nginx:
     image: nginx:alpine
     container_name: fivefasad-nginx
@@ -24,6 +33,7 @@ services:
       - ./frontend:/usr/share/nginx/html:ro
     depends_on:
       - backend
+      - php
     networks:
       - fivefasad-network
 

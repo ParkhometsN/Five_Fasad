@@ -1,0 +1,30 @@
+# Robots.txt для сайта Пятый Фасад
+# https://5fasad.ru/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /src/js/
+Disallow: /src/style/
+
+# Разрешаем индексацию основных страниц
+Allow: /index.html
+Allow: /AboutUs.html
+Allow: /Portfolio.html
+Allow: /politics.html
+
+# Разрешаем индексацию изображений
+Allow: /src/assests/img/
+Allow: /src/assests/svg/
+Allow: /src/assests/favicon/
+
+# Sitemap
+Sitemap: https://5fasad.ru/sitemap.xml
+
+# Crawl-delay для некоторых ботов (опционально)
+User-agent: Yandex
+Crawl-delay: 1
+
+User-agent: Googlebot
+Crawl-delay: 1
+
