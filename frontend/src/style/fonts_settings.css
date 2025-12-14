@@ -1,0 +1,245 @@
+@font-face {
+    font-family: "coolvetregular";
+    src: url(./fonts/coolvetica\ rg.ttf);
+}
+@font-face {
+    font-family: "Cygre";
+    src: url(./fonts/Cygre-Book.ttf);
+}
+@font-face {
+    font-family:"logoFont";
+    src: url(./fonts/Widock\ TRIAL\ Bold.otf);
+}
+
+@font-face {
+    font-family: 'manrope';
+    src: url(./fonts/Manrope-VariableFont_wght.ttf);
+}
+.text_line{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+h1 {
+display: block;
+font-size: 56px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 200;
+line-height: 77%;
+letter-spacing: 2%;
+}
+h2 {
+display: block;
+font-size: 35px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 200;
+line-height: 115%;
+letter-spacing: 2%;
+}
+h3 {
+display: block;
+font-size: 20px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 200;
+line-height: 115%;
+letter-spacing: 2%;
+}
+h4 {
+display: block;
+font-size: 18px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 100;
+line-height: 118.5%;
+letter-spacing: 2%;
+}
+h5 {
+display: block;
+font-size: 16px;
+margin-block-start: 0em;
+margin-block-end: 0em;
+margin-inline-start: 0px;
+font-weight: 200;
+line-height: 115%;
+letter-spacing: 2%;
+}
+h6{
+    display: block;
+    font-size: 17px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+line-height: 115%;
+    letter-spacing: 2%; 
+    font-family: "Cygre"; 
+}
+
+
+@media screen and (max-width: 1194px){
+    h1 {
+    display: block;
+    font-size: 46px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+    h2 {
+    display: block;
+    font-size: 35px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+    h3 {
+    display: block;
+    font-size: 18px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+    h4 {
+    display: block;
+    font-size: 18px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 100;
+    line-height: 118.5%;
+    letter-spacing: 2%;
+    }
+    h5 {
+    display: block;
+    font-size: 16px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+}
+
+@media screen and (max-width: 834px){
+    h1 {
+    display: block;
+    font-size: 35px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+    h2 {
+    display: block;
+    font-size: 35px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 100%;
+    letter-spacing: 2%;
+    }
+    h3 {
+    display: block;
+    font-size: 20px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+    h4 {
+    display: block;
+    font-size: 18px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 100;
+    line-height: 118.5%;
+    letter-spacing: 2%;
+    }
+    h5 {
+    display: block;
+    font-size: 16px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+}
+@media screen and (max-width: 375px){
+    h1 {
+    display: block;
+    font-size: 35px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 100%;
+    letter-spacing: 2%;
+    }
+    h2 {
+    display: block;
+    font-size: 35px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 100%;
+    letter-spacing: 2%;
+    }
+    h3 {
+    display: block;
+    font-size: 15px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+    h4 {
+    display: block;
+    font-size: 15px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 100;
+    line-height: 118.5%;
+    letter-spacing: 2%;
+    }
+    h5 {
+    display: block;
+    font-size: 16px;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    font-weight: 200;
+    line-height: 77%;
+    letter-spacing: 2%;
+    }
+}

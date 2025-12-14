@@ -1,0 +1,123 @@
+.footer_container{
+    padding: 60px 20px 110px 20px;
+    display: flex;
+    justify-content: center;
+}
+.footer_content{
+    display: flex;
+    justify-content: center;
+    background-color: var(--black2);
+    border-radius: 24px;
+    width: 691px;
+    height: 100%;
+}
+.footer_cc{
+    padding: 15px;
+    max-width: 570px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.textfooter{
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-direction: column;
+}
+.textfooter h4,
+.textfooter h1{
+    text-align: center;
+}
+.secline,
+.frline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.partners{
+    width: 100%;
+    margin-top: 60px;
+    border-radius: 10px;
+    padding: 24px;
+    background-color: var(--black);
+}
+@media screen and (max-width:800px){
+.foter_navigation {
+    display: flex;
+    align-items: flex-start !important ;
+    gap: 16px;
+    flex-direction: column;
+}
+.partners{
+    width: 74vw;
+}
+}
+@media screen and (max-width: 375px){
+    .footer_content{
+    width: 100%;
+    }
+    .secline img,
+    .frline img{
+    width: 30px;
+    }
+    .threlineinf a h5 {
+    font-weight: 500 !important;
+    font-family: 'manrope';
+    width: 43vw;
+}
+    .partners {
+    width: 70vw;
+    margin-top: 60px;
+    border-radius: 10px;
+    padding: 24px;
+    background-color: var(--black);
+}
+.seclineinf {
+    align-items: flex-start !important;
+    flex-direction: row;
+}
+.contacts_footer_information {
+    width: 81vw !important;
+}
+.foter_navigation {
+    align-items: flex-start !important;
+    flex-direction: column;
+}
+}
+.img_mockup{
+    padding-top: 26px;
+}
+
+.contacts_footer_information{
+    width: 100%;
+    padding-top: 24px;
+}
+.frlineinf h3{
+    line-height: 26px;
+}
+.seclineinf{
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.foter_navigation{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+
+.threlineinf{
+    font-family: 'manrope';
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.threlineinf a h5{
+    font-weight: 500 !important;
+    font-family: 'manrope';
+}
