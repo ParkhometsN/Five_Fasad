@@ -17,7 +17,7 @@ services:
     container_name: fivefasad-php
     restart: unless-stopped
     volumes:
-      - ./frontend:/var/www/html:ro
+      - ./frontend:/usr/share/nginx/html:ro  # ИЗМЕНИЛ ПУТЬ!
     networks:
       - fivefasad-network
 
