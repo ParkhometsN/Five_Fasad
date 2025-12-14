@@ -111,7 +111,7 @@ export function MessageChat() {
   }
 
   function initSocket() {
-    socket = io('http://localhost:3002');
+    socket = io('http://95.163.227.23:3002');
 
     const clientId = localStorage.getItem('chatClientId') || 'cid_' + Date.now().toString(36);
     localStorage.setItem('chatClientId', clientId);
