@@ -111,7 +111,11 @@ export function MessageChat() {
   }
 
   function initSocket() {
-    socket = io('http://95.163.227.23:3002');
+    const origin = window.location.origin;
+    socket = io(origin, {
+      path: '/socket.io/',
+      transports: ['websocket', 'polling']
+    });
 
     const clientId = localStorage.getItem('chatClientId') || 'cid_' + Date.now().toString(36);
     localStorage.setItem('chatClientId', clientId);
