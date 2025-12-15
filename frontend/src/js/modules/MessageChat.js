@@ -114,14 +114,32 @@ export function MessageChat() {
     const origin = window.location.origin;
     socket = io(origin, {
       path: '/socket.io/',
-      transports: ['websocket', 'polling']
+      transports: ['websocket', 'polling'],
+      reconnection: true,
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      timeout: 20000
     });
 
     const clientId = localStorage.getItem('chatClientId') || 'cid_' + Date.now().toString(36);
     localStorage.setItem('chatClientId', clientId);
 
     socket.on('connect', () => {
+      console.log('Socket.IO connected');
       socket.emit('identify', clientId);
+    });
+
+    socket.on('connect_error', (error) => {
+      // Игнорируем ошибки DNS (ERR_NAME_NOT_RESOLVED) - это проблема клиента
+      if (error.message && error.message.includes('ERR_NAME_NOT_RESOLVED')) {
+        console.warn('DNS resolution failed, check your network settings');
+        return;
+      }
+      console.error('Socket.IO connection error:', error);
+    });
+
+    socket.on('disconnect', (reason) => {
+      console.log('Socket.IO disconnected:', reason);
     });
     
     socket.on('manager_message', (text) => {

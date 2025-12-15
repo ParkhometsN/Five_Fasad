@@ -27,13 +27,20 @@ padding: 24px;
     list-style: none;
 }
 .navigation li a{
-  opacity: 1;
-  transition: all 0.3s ease;
+  display: inline-block;
+  transition: opacity 0.3s ease;
 }
-.navigation li a:hover{
+.navigation li a,
+.navigation li a h4{
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.navigation li a:hover,
+.navigation li a:hover h4{
   opacity: 0.5;
 }
-.navigation li a:active{
+.navigation li a:active,
+.navigation li a:active h4{
   opacity: 0.1;
 }
 .logo h3{
