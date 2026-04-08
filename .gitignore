@@ -1,0 +1,31 @@
+# Node.js модули бэкенда
+backend/node_modules/
+
+# Локальные файлы зависимостей
+backend/package-lock.json
+
+# Переменные окружения
+backend/.env
+backend/.env.local
+
+# Логи
+backend/logs/
+backend/*.log
+backend/npm-debug.log*
+
+# Docker локальные файлы
+docker-compose.override.yml
+
+# SSL сертификаты (если будут)
+nginx/ssl/
+*.pem
+*.key
+*.crt
+
+# Системные файлы macOS
+.DS_Store
+
+# Временные файлы
+*.swp
+*.swo
+*~

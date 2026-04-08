@@ -1,0 +1,39 @@
+services:
+  backend:
+    build: ./backend
+    container_name: fivefasad-backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - fivefasad-network
+
+  php:
+    image: php:8.2-fpm-alpine
+    container_name: fivefasad-php
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/var/www/html
+    networks:
+      - fivefasad-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: fivefasad-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443" 
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend:/var/www/html
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - backend
+      - php
+    networks:
+      - fivefasad-network
+
+networks:
+  fivefasad-network:
+    driver: bridge

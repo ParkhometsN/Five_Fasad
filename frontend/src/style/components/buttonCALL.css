@@ -1,0 +1,49 @@
+
+
+/* Стили кнопки вызова */
+.call-button {
+    position: fixed;
+    bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    background-color: var(--prymary-hover);
+    padding: 10px 20px 10px 10px;
+    border-radius: 50px;
+    color: var(--prymary);
+    border: none;
+    font-family: "coolvetregular", Arial, sans-serif;
+    font-size: 22px !important;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0px 0px 0px 4px var(--prymary-hover), 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+    white-space: nowrap;
+    backdrop-filter: blur(4px);
+}
+
+/* Эффекты при наведении */
+.call-button:hover {
+    background-color: var(--prymary);
+    color: var(--white);
+    opacity: 0.8;
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0px 0px 0px 4px var(--prymary-hover), 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* Эффект при клике */
+.call-button:active {
+    opacity: 0.4;
+    transform: translateX(-50%) translateY(0px);
+}
+
+/* Класс для скрытия кнопки */
+.call-button.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(20px);
+}
+
