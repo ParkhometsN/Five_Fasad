@@ -25,7 +25,7 @@ $(document).ready(function() {
             return;
         }
         
-        // Валидация телефона (проверяем что ввели хотя бы 10 цифр)
+        // Валидация телефона
         let phone = formData.phone.replace(/\D/g, '');
         if (phone.length < 10) {
             showMessage('Пожалуйста, введите корректный номер телефона', 'error');
@@ -50,12 +50,14 @@ $(document).ready(function() {
         let originalText = submitBtn.html();
         submitBtn.prop('disabled', true).html('<h4>Отправка...</h4>');
         
+        // ВАЖНО: отправляем на PHP обработчик
         $.ajax({
-            url: '/send_form.php',
+            url: '/send_form.php',  // Абсолютный путь от корня сайта
             type: 'POST',
             data: formData,
             dataType: 'json',
             success: function(response) {
+                console.log('Ответ сервера:', response);
                 if (response.success) {
                     showMessage(response.message, 'success');
                     // Очищаем форму
@@ -68,7 +70,16 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error('Ошибка:', error);
-                showMessage('Ошибка соединения. Попробуйте позже.', 'error');
+                console.error('Статус:', xhr.status);
+                console.error('Ответ:', xhr.responseText);
+                
+                if (xhr.status === 404) {
+                    showMessage('Ошибка: обработчик не найден. Проверьте наличие файла send_form.php', 'error');
+                } else if (xhr.status === 405) {
+                    showMessage('Ошибка: неверный метод запроса. Проверьте настройки сервера', 'error');
+                } else {
+                    showMessage('Ошибка соединения. Попробуйте позже.', 'error');
+                }
             },
             complete: function() {
                 // Разблокируем кнопку
@@ -120,21 +131,23 @@ $(document).ready(function() {
         $('body').append(messageHtml);
         
         // Добавляем анимацию
-        $('<style>')
-            .prop('type', 'text/css')
-            .html(`
-                @keyframes slideInRight {
-                    from {
-                        transform: translateX(100%);
-                        opacity: 0;
+        if (!$('#form-message-styles').length) {
+            $('<style id="form-message-styles">')
+                .prop('type', 'text/css')
+                .html(`
+                    @keyframes slideInRight {
+                        from {
+                            transform: translateX(100%);
+                            opacity: 0;
+                        }
+                        to {
+                            transform: translateX(0);
+                            opacity: 1;
+                        }
                     }
-                    to {
-                        transform: translateX(0);
-                        opacity: 1;
-                    }
-                }
-            `)
-            .appendTo('head');
+                `)
+                .appendTo('head');
+        }
         
         // Автоматически скрываем через 5 секунд
         setTimeout(function() {

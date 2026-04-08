@@ -47,3 +47,6 @@
     transform: translateX(-50%) translateY(20px);
 }
 
+.call-button img{
+    width: 2vw;
+}
