@@ -50,9 +50,9 @@ $(document).ready(function() {
         let originalText = submitBtn.html();
         submitBtn.prop('disabled', true).html('<h4>Отправка...</h4>');
         
-        // ВАЖНО: отправляем на PHP обработчик
+        // ВАЖНО: отправляем на PHP обработчик, а не на HTML!
         $.ajax({
-            url: '/send_form.php',  // Абсолютный путь от корня сайта
+            url: '/send_form.php',  // <- ПРАВИЛЬНЫЙ URL
             type: 'POST',
             data: formData,
             dataType: 'json',
