@@ -2,10 +2,32 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const { Telegraf, Markup } = require('telegraf');
+const nodemailer = require('nodemailer');
 
 const app = express();
+
+
+// Middleware для парсинга данных формы
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Настройка SMTP для отправки писем
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+        user: 'mofmails@gmail.com',
+        pass: 'tsdzbhmemjyfjlkh'
+    }
+});
+
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
+
+// Добавьте в начало файла после require
+const cors = require('cors');
+app.use(cors());
 
 const bot = new Telegraf('8500810444:AAHISPjpFdG-TIxWS9jcQXObKGJnbTDfxL4');
 const MANAGER_CHAT_ID = '866843496';
@@ -115,6 +137,54 @@ function updateWelcomeMessageForAllClients() {
         }
     });
 }
+
+// API для отправки формы
+app.post('/api/send-form', async (req, res) => {
+    console.log('📝 Получена форма:', req.body);
+    
+    try {
+        const { name, position, phone, email, message } = req.body;
+        
+        // Валидация
+        if (!name || !position || !phone || !email) {
+            return res.json({
+                success: false,
+                message: 'Пожалуйста, заполните все обязательные поля'
+            });
+        }
+        
+        // Формируем письмо
+        const mailOptions = {
+            from: 'mofmails@gmail.com',
+            to: 'parkhometsnikita@gmail.com',
+            subject: 'Новая заявка с сайта Five Fasad',
+            html: `
+                <h2>Новая заявка с сайта</h2>
+                <table border="1" cellpadding="5">
+                    <tr><td><strong>Имя:</strong></td><td>${name}</td></tr>
+                    <tr><td><strong>Должность:</strong></td><td>${position}</td></tr>
+                    <tr><td><strong>Телефон:</strong></td><td>${phone}</td></tr>
+                    <tr><td><strong>Email:</strong></td><td>${email}</td></tr>
+                    ${message ? `<tr><td><strong>Сообщение:</strong></td><td>${message}</td></tr>` : ''}
+                </table>
+            `
+        };
+        
+        await transporter.sendMail(mailOptions);
+        
+        res.json({
+            success: true,
+            message: 'Заявка успешно отправлена! Мы свяжемся с вами.'
+        });
+        
+    } catch (error) {
+        console.error('Ошибка отправки:', error);
+        res.json({
+            success: false,
+            message: 'Ошибка отправки. Попробуйте позже.'
+        });
+    }
+});
 
 // WebSocket логика
 io.on('connection', (socket) => {

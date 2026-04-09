@@ -52,7 +52,7 @@ $(document).ready(function() {
         
         // ВАЖНО: отправляем на PHP обработчик, а не на HTML!
         $.ajax({
-            url: '/send_form.php',  // <- ПРАВИЛЬНЫЙ URL
+        url: '/api/send-form',
             type: 'POST',
             data: formData,
             dataType: 'json',
