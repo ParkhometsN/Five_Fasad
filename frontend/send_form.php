@@ -1,4 +1,7 @@
-# Создаем новый правильный файл
+# Удаляем испорченный файл
+docker exec fivefasad-php rm /var/www/html/send_form.php
+
+# Создаем новый файл построчно (без ошибок)
 docker exec -i fivefasad-php tee /var/www/html/send_form.php << 'EOF'
 <?php
 // send_form.php - обработчик формы обратной связи
@@ -13,13 +16,11 @@ require_once('phpmailer/src/Exception.php');
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// Функция отправки письма
 function sendEmail($subject, $body) {
     $mail = new PHPMailer(true);
     $mail->CharSet = 'utf-8';
     
     try {
-        // Настройки SMTP
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
@@ -28,7 +29,6 @@ function sendEmail($subject, $body) {
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
         
-        // Отправитель и получатель
         $mail->setFrom('mofmails@gmail.com', 'Five Fasad');
         $mail->addAddress('parkhometsnikita@gmail.com');
         
@@ -46,24 +46,20 @@ function sendEmail($subject, $body) {
 
 $response = ['success' => false, 'message' => ''];
 
-// ПРАВИЛЬНАЯ проверка метода
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // Получаем данные из формы
     $name = htmlspecialchars($_POST['name'] ?? '');
     $position = htmlspecialchars($_POST['position'] ?? '');
     $phone = htmlspecialchars($_POST['phone'] ?? '');
     $email = htmlspecialchars($_POST['email'] ?? '');
     $message = htmlspecialchars($_POST['message'] ?? '');
     
-    // Валидация
     if (empty($name) || empty($position) || empty($phone) || empty($email)) {
         $response['message'] = 'Пожалуйста, заполните все обязательные поля';
         echo json_encode($response, JSON_UNESCAPED_UNICODE);
         exit;
     }
     
-    // Формируем письмо
     $subject = 'Новая заявка с сайта Five Fasad';
     
     $body = "
@@ -83,29 +79,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </head>
     <body>
         <div class='container'>
-            <h2>📋 Новая заявка с сайта</h2>
+            <h2>Новая заявка с сайта</h2>
             <table>
                 <tr><th>Поле</th><th>Значение</th></tr>
-                <tr><td><strong>👤 Имя</strong></td><td>{$name}</td></tr>
-                <tr><td><strong>💼 Должность</strong></td><td>{$position}</td></tr>
-                <tr><td><strong>📞 Телефон</strong></td><td>{$phone}</td></tr>
-                <tr><td><strong>📧 Email</strong></td><td>{$email}</td></tr>
+                <tr><td><strong>Имя</strong></td><td>{$name}</td></tr>
+                <tr><td><strong>Должность</strong></td><td>{$position}</td></tr>
+                <tr><td><strong>Телефон</strong></td><td>{$phone}</td></tr>
+                <tr><td><strong>Email</strong></td><td>{$email}</td></tr>
             </table>";
     
     if (!empty($message)) {
-        $body .= "<div class='message-box'><strong>💬 Сообщение:</strong><p>{$message}</p></div>";
+        $body .= "<div class='message-box'><strong>Сообщение:</strong><p>{$message}</p></div>";
     }
     
     $body .= "</div></body></html>";
     
     if (sendEmail($subject, $body)) {
         $response['success'] = true;
-        $response['message'] = 'Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.';
+        $response['message'] = 'Заявка успешно отправлена! Мы свяжемся с вами.';
     } else {
-        $response['message'] = 'Ошибка при отправке. Пожалуйста, попробуйте позже.';
+        $response['message'] = 'Ошибка при отправке. Попробуйте позже.';
     }
 } else {
-    $response['message'] = 'Неверный метод запроса. Используйте POST.';
+    $response['message'] = 'Используйте POST метод';
 }
 
 echo json_encode($response, JSON_UNESCAPED_UNICODE);
