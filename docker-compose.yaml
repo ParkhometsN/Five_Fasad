@@ -14,6 +14,11 @@ services:
     restart: unless-stopped
     volumes:
       - ./frontend:/var/www/html
+    environment:
+      - MAILERSEND_API_TOKEN=mlsn.965f7a5c00daee38a4ceef2d3615326952c8a026ae82533d12872646fec3f160
+      - MAILERSEND_FROM_EMAIL=noreply@5fasad.ru
+      - MAILERSEND_FROM_NAME=Five Fasad
+      - MAILERSEND_TO_EMAIL=parkhometsnikita@gmail.com
     networks:
       - fivefasad-network
 
